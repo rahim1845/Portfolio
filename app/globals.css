@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ─── */
+:root {
+  --ink: #0f0f0f;
+  --paper: #f4f1eb;
+  --cream: #ede9df;
+  --red: #d83a2c;
+  --muted: #6e6a62;
+  --border: rgba(15, 15, 15, 0.08);
+
+  /* Golden ratio spacing */
+  --space-s: 3rem;
+  --space-m: 4.875rem;
+  --space-l: 6rem;
+  --space-xl: 9.875rem;
+  --space-2xl: 16rem;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-cream: var(--cream);
+  --color-red: var(--red);
+  --color-muted: var(--muted);
+  --font-display: var(--font-fraunces), 'Georgia', serif;
+  --font-body: var(--font-inter-tight), 'Helvetica Neue', sans-serif;
+  --font-mono: var(--font-jetbrains), 'Courier New', monospace;
+}
+
+/* ─── Base Reset ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+@media (pointer: coarse) {
+  body { cursor: auto; }
+}
+
+/* ─── Typography ─── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: var(--red);
+  color: var(--paper);
+}
+
+/* ─── Focus ─── */
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 4px;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ─── Sliding underline ─── */
+.underline-reveal {
+  position: relative;
+  text-decoration: none;
+}
+.underline-reveal::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.underline-reveal:hover::after { width: 100%; }
+
+/* ─── Nav active state ─── */
+.nav-active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--red);
+}
+
+/* ─── Section rule ─── */
+.section-rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.section-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
